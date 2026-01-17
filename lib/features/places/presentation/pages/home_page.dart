@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:places_app/features/places/presentation/cubit/mic/mic_cubit.dart';
+import 'package:places_app/features/places/presentation/cubit/speech/speech_cubit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -39,9 +40,11 @@ class HomePage extends StatelessWidget {
           return GestureDetector(
             onLongPress: () {
               context.read<MicCubit>().startRecording();
+              context.read<SpeechCubit>().startListening();
             },
             onLongPressEnd: (_) {
               context.read<MicCubit>().stopRecording();
+              context.read<SpeechCubit>().stopListening();
             },
             child: FloatingActionButton(
               backgroundColor: isPressed ? Colors.red : Colors.black,
